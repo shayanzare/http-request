@@ -23,6 +23,7 @@
 #include <QEventLoop>
 #include <QByteArray>
 #include <QVariant>
+#include <QLoggingCategory>
 
 
 //Post http request
@@ -32,6 +33,7 @@
 */
 void Post(QString uri, QString header)
 {
+    QLoggingCategory::setFilterRules("qt.network.ssl.warning=false");
     QEventLoop eventLoop;
     QNetworkAccessManager manager;
     QUrl url(uri);
@@ -46,6 +48,7 @@ void Post(QString uri, QString header)
 
 void Get(QString uri)
 {
+    QLoggingCategory::setFilterRules("qt.network.ssl.warning=false");
     QEventLoop eventLoop;
     QNetworkAccessManager mgr;
     QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
